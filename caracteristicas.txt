@@ -1,0 +1,19 @@
+-> Redis eh um banco de dados nosql, porem nao eh relacionada a documentos(como o mongodb), 
+   e sim um dicionario de dados, ou seja, armazena chave e valor.
+
+-> O redis eh bastante usado quando queremos ter uma leitura ou escrita dos dados mais rapida.
+
+-> Redis tem uma grande performance de leitura/escrita pois os dados sao armazenados em memoria no servidor.
+
+-> Redis nao trabalha com transacoes por padrao, logo cada operacao eh tratada como sincrona e unica, ou seja,
+   cada operacao devera ser aguardada ate que nao tenha nenhuma operacao sendo executada naquele momento.
+   
+-> Redis tem um grande proposito e eh muito util quando queremos ter um servidor de cashe focado na nossa aplicacao,
+   ainda mais que no redis podemos trabalhar com sessoes, ja que podemos configurar para os dados serem expirados
+   apos um determinado tempo.
+
+-> Pelo fato do redis trabalhar com os dados somente eme memoria, caso a maquina do redis for desligada, todas
+   as informacoes serao descartadas. Logo uma usabilidade bem comum em um sistema que utiliza redis, eh nao armazenar
+   apenas os dados no redis e sim tambem em algum outro banco de dados, para que caso o redis perder os dados na memoria,
+   podera recuperar as informacoes nesse outro banco de dados. Inclusive podemos configurar essa persistencia para outro
+   banco de dados tambem pelo proprio redis.

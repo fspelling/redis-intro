@@ -1,0 +1,21 @@
+-> As chaves devem seguir um padrao para ajudar na busca.
+
+-> Os padroes das chaves normalmente seguem com :(dois pontos).
+
+-> cada grupo do nome da chave normalmente segue assim (nome_objeto:identidicador_coluna).
+
+-> Usamos conjunto de chave e valor com hash(dicionario), quando queremos armazenar outras 
+   informacoes naquela chave em especifica.
+
+-> No redis podemos usar sessoes para persistir algumas informacoes pessoais durante um x de tempo,
+   e apos esse tempo, essas informacoes serem descartadas.
+
+-> Quando usamos SETBIT, basicamente estamos definindo uma lista/mapa de bits para aquela chave especifica,
+   e a lista/mapa de bits basicamente eh um hash porem de uma lista mapeada com um indice e o bit como o seu valor,
+   com isso podemos otimizar mais a nossa memoria, pois estamos alocando apenas aquele espaco dos bits armazenados. 
+   Um cenario interessante eh quando queremos difinir uma lista de usuarios que acessou ou nao o nosso sistema, 
+   entre outros varios exemplos.
+
+-> Podemos usar operadores "&&" e "OR" no redis quando se trata de uma lista/mapa de bits, e basicamente eh definido 
+   nesse operador duas chaves para a validacao ser realizada, e como resultado sera retornado uma nova lista/mapa de
+   bits, indicando quais items/indices da lista foram indicados como verdadeiro nos operadores "&&" ou "OR".
