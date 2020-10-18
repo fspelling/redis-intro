@@ -10,12 +10,27 @@
 -> No redis podemos usar sessoes para persistir algumas informacoes pessoais durante um x de tempo,
    e apos esse tempo, essas informacoes serem descartadas.
 
--> Quando usamos SETBIT, basicamente estamos definindo uma lista/mapa de bits para aquela chave especifica,
-   e a lista/mapa de bits basicamente eh um hash porem de uma lista mapeada com um indice e o bit como o seu valor,
+-> Quando usamos SETBIT, basicamente estamos definindo um mapa de bits para aquela chave especifica,
+   e a mapa de bits basicamente eh um hash porem de um mapa mapeada com um indice e o bit como o seu valor,
    com isso podemos otimizar mais a nossa memoria, pois estamos alocando apenas aquele espaco dos bits armazenados. 
-   Um cenario interessante eh quando queremos difinir uma lista de usuarios que acessou ou nao o nosso sistema, 
+   Um cenario interessante eh quando queremos difinir um mapa de usuarios que acessou ou nao o nosso sistema, 
    entre outros varios exemplos.
 
--> Podemos usar operadores "&&" e "OR" no redis quando se trata de uma lista/mapa de bits, e basicamente eh definido 
-   nesse operador duas chaves para a validacao ser realizada, e como resultado sera retornado uma nova lista/mapa de
-   bits, indicando quais items/indices da lista foram indicados como verdadeiro nos operadores "&&" ou "OR".
+-> Podemos usar operadores "&&" e "OR" no redis quando se trata de um mapa de bits, e basicamente eh definido 
+   nesse operador duas chaves para a validacao ser realizada, e como resultado sera retornado um novo mapa de
+   bits, indicando quais items/indices do mapa foram indicados como verdadeiro nos operadores "&&" ou "OR".
+
+-> No redis conseguimos tratar o estado conhecido como busy wait(ocupado esperando), ou seja, quando precisamos
+   executar algum comando mas naquele momento aquela chave ainda nao foi populada, ou seja, esta nula, e precisamos
+   seguir em nosso algoritmo so apos que retorne algo, nao precisamos ficar executando varias vezes seguidas ate que retorne,
+   podemos bloquear o processamento do comando e a conexao do banco para aquela instancia por algum tempo, ate que consiga retornar 
+   algo ou o tempo seja expirado, pois isso tambem ira usar muito do nosso processador, ainda mais se a maquina do redis e o programa 
+   que esta consumindo o redis, forem em servidores diferentes teriamos problemas de trafegos de redes desnecessarios.
+
+-> Uma caracteristica do redis, eh que quando se trata de valores do tipo de conjuntos, nao consiguiremos adiconar valores duplicados,
+   pois nao faz sentido um conjunto de mais de uma informacao/dado repetida.
+
+-> Lembrando que o conjunto diferentemente de uma lista nao tem ordem de entrada e saida do dado, logo para saber a quantidade
+   de elementos que possui, nao usamos o comando "LENGHT", pois um conjunto nao possui tamanho diferentemente de uma lista que possui,
+   pois uma lista vai crescendo ou diminuindo conforme vamos adicionando ou removendo elementos nela, ja um conjunto possui cardinalidade,
+   ou seja, a cardinalidade mostrar quantos elementos aquele conjunto possui.

@@ -17,3 +17,11 @@
    apenas os dados no redis e sim tambem em algum outro banco de dados, para que caso o redis perder os dados na memoria,
    podera recuperar as informacoes nesse outro banco de dados. Inclusive podemos configurar essa persistencia para outro
    banco de dados tambem pelo proprio redis.
+
+-> Como ja foi dito, o redis eh um banco de dados de chave e valor, onde o valor pode ser:
+   -> texto(string)
+   -> numeros(int/float)(podemos incrementar/decrementar esses valores)
+   -> mapa de bits(conjunto de bits referenciado pelo seu indice)
+   -> lista de valores(podendo limitar e ordenar qualquer tipo lista de valores)
+   -> conjunto de valores(diferente da lista pois nao tem ordem de entrada e saida do dado, o conceito pode ser considerado 
+      semelhante ao uma table do sql, ou ate mesmo uma collection do mongodb)

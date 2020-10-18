@@ -58,14 +58,75 @@
 -- Adicionar/Alterar um novo conjunto de chave e valor, sendo o valor com uma lista de bits
 > SETBIT acesso:25-05-2015 1 1
 
--- Busca o valor bit armazenado atraves da chave da lista de bits
+-- Busca o valor bit armazenado atraves da chave do mapa de bits
 > GETBIT acesso:25-05-2015 1
 
--- Retorna a quantidade de bits setados para 1 da nossa lista/mapa de bits referente a chave especifica
+-- Retorna a quantidade de bits setados para 1 do nosso mapa de bits referente a chave especifica
 > BITCOUNT acesso:27-06-2015
 
--- Gera um nova lista/mapa de bits, de acordo com a valicao binario 'AND' de duas ou mais lista de bits
+-- Gera um novo mapa de bits, de acordo com a valicao binario 'AND' de duas ou mais mapas de bits
 > BITOP AND acesso:25-06-2015:AND:26-06-2015 acesso:25-06-2015 acesso:26-06-2015
 
--- Gera um nova lista/mapa de bits, de acordo com a valicao binario 'OR' de duas ou mais lista de bits
+-- Gera um novo mapa de bits, de acordo com a valicao binario 'OR' de duas ou mais mapas de bits
 > BITOP OR acesso:25-06-2015:OR:26-06-2015 acesso:25-06-2015 acesso:26-06-2015
+
+-- Adiciona um item na esquerda(left) na lista de valores da chave especifica
+> LPUSH ultimas_noticias "Jogador de futebol e flagrado jogando basquete na rua"
+
+-- Adiciona um item na direita(right) na lista de valores da chave especifica
+> RPUSH ultimas_noticias "Jogador de futebol e flagrado jogando basquete na rua"
+
+-- Busca o item da lista pelo indice indicado
+> LINDEX ultimas_noticias 0
+
+-- Busca um intervalo de itens da lista pelos indices indicados(indice inicial e indice final)
+> LRANGE ultimas_noticias 0 3
+
+-- Retorna a quantidade de itens de uma lista da chave especidica
+> LLEN ultimas_noticias
+
+-- Remover os itens da lista que estejam fora do intervalo indicado
+> LTRIM ultimas_noticias 0 2
+
+-- Busca e remove o primeiro(left) item da lista
+> LPOP fila:envio-email
+
+-- Busca e remove o ultimo(right) item da lista
+> RPOP fila:envio-email
+
+-- Busca e remove o primeiro(left) item da lista e bloqueia a comunicacao com o client ate que algum dado retorne diferente de null,
+-- ou que o tempo indicado seja expirado, que nesse caso seria 10 segundos
+> BLPOP fila:confirma-email 10
+
+-- Busca e remove o ultimo(right) item da lista e bloqueia a comunicacao com o client ate que algum dado retorne diferente de null,
+-- ou que o tempo indicado seja expirado, que nesse caso seria 10 segundos(timeout = 10)
+> BRPOP fila:confirma-email 10
+
+-- Busca e remove o primeiro(left) item da lista e bloqueia a comunicacao com o client ate que algum dado retorne diferente de null,
+-- em cima de um tempo inderterminado(timeout = 0)
+> BLPOP fila:confirma-email 0
+
+-- Adiciona um elemento no conjunto
+> SADD "relacionamentos:guilherme" "Ana"
+
+-- Remove um elemento no conjunto
+> SREM "relacionamentos:guilherme" "Ana"
+
+-- Retorna a cardinalidade do conjunto, ou seja, retorna a quantidade de elementos que o conjunto tem
+> SCARD "relacionamentos:guilherme"
+
+-- Verifica se o conjunto tem um elemento especifico
+> SISMEMBER "relacionamentos:guilherme" "Ana"
+
+-- Busca todos os membros/elementos do conjunto
+> SMEMBERS "relacionamentos:guilherme"
+
+-- Busca a interseccao(join) de duas ou mais conjuntos
+> SINTER "relacionamentos:guilherme" "relacionamentos:carlos"
+
+-- Busca a diferenca/oposto da interseccao(left join) de duas ou mais conjuntos, ou seja, ira trazer todos os elementos que
+-- do primeiro conjunto que o segundo ainda nao tem
+> SDIFF "relacionamentos:guilherme" "relacionamentos:carlos"
+
+-- Retorna a uniao de todos os membros/elementos de duas os mais conjuntos, e sem membros repetidos, caso um membro tiver em mais de um conjunto
+> SUNION "relacionamentos:carlos" "relacionamentos:guilherme"
