@@ -34,3 +34,14 @@
    de elementos que possui, nao usamos o comando "LENGHT", pois um conjunto nao possui tamanho diferentemente de uma lista que possui,
    pois uma lista vai crescendo ou diminuindo conforme vamos adicionando ou removendo elementos nela, ja um conjunto possui cardinalidade,
    ou seja, a cardinalidade mostrar quantos elementos aquele conjunto possui.
+
+-> Quando trabalhamos com conjuntos ordenados, como o exemplo 'ZADD "jogadores:pontuacao" 50441 "guilherme"', o valor do elemento do conjunto
+   continua sendo unico, que nesse caso seria o valor "guilherme", o valor "50441" seria basicamente o valor do rank para o redis saber fazer a 
+   ordenacao desses elementos no conjunto. Portando se tentarmos executar o comando 'ZADD "jogadores:pontuacao" 50442 "guilherme"' nao ira adicionar 
+   um novo elemento no conjunto, e sim estamos atualizando apenas o valor do rank para o redis fazer a ordenacao novamente, pois como ja vimos 
+   os valores dos elementos do conjunto nao pode ter duplicidade, e mesmo que no comando colocamos o valor do rank diferente, o valor real ainda 
+   continua sendo apenas o "guilherme", que ja existe no conjunto.
+
+-> Quando queremos listar nossos elementos atraves do comando 'RANGE', sendo o tipo do dado uma lista ou um conjunto ordenado, uma forma de listarmos
+   todos os itens seria informar o ultimo indice como '-1', pois ele ira representar o ultimo indice da lista ou do conjunto. Portanto o indice '-2'
+   representa o penultimo elemento, o '-3' o antepenultimo elemento, e assim por diante.

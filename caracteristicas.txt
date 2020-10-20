@@ -25,3 +25,4 @@
    -> lista de valores(podendo limitar e ordenar qualquer tipo lista de valores)
    -> conjunto de valores(diferente da lista pois nao tem ordem de entrada e saida do dado, o conceito pode ser considerado 
       semelhante ao uma table do sql, ou ate mesmo uma collection do mongodb)
+   -> conjunto de valores ordenados

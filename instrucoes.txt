@@ -46,14 +46,26 @@
 -- Incrementa o valor informado como parametro automaticamente ao valor atual da chave
 > INCRBY pagina:/contato:05-05-2015 10
 
+-- Incrementa o valor informado no nampo do hash especifico
+> HINCRBY "jogador:1" "pontos" 10
+
 -- Decrementa o valor informado como parametro automaticamente ao valor atual da chave
 > DECRBY pagina:/contato:05-05-2015 10
+
+-- Decrementa o valor informado no nampo do hash especifico
+> HDECRBY "jogador:1" "pontos" 10
 
 -- Incrementa o valor flutuante informado como parametro automaticamente ao valor atual da chave
 > INCRBYFLOAT pagina:/contato:05-05-2015 10.45
 
+-- Incrementa o valor informado no nampo do hash especifico
+> HINCRBYFLOAT "jogador:1" "pontos" 10
+
 -- Decrementa o valor flutuante informado como parametro automaticamente ao valor atual da chave
 > DECRBYFLOAT pagina:/contato:05-05-2015 10.45
+
+-- Decrementa o valor flutuante informado no nampo do hash especifico
+> HDECRBYFLOAT "jogador:1" "pontos" 10
 
 -- Adicionar/Alterar um novo conjunto de chave e valor, sendo o valor com uma lista de bits
 > SETBIT acesso:25-05-2015 1 1
@@ -130,3 +142,28 @@
 
 -- Retorna a uniao de todos os membros/elementos de duas os mais conjuntos, e sem membros repetidos, caso um membro tiver em mais de um conjunto
 > SUNION "relacionamentos:carlos" "relacionamentos:guilherme"
+
+-- Retorna qual tipo de valor da chave foi armazenada(string, hash, lista de bits, conjunto, etc)
+> TYPE "jogador:1"
+
+-- Adiciona um elemento em um conjunto ordernado(RANK = 50441)
+> ZADD "jogadores:pontuacao" 50441 "guilherme"
+
+-- Retorna a cardinalidade do conjunto ordernado, ou seja, retorna a quantidade de elementos que o conjunto tem
+> ZCARD "jogadores:pontuacao"
+
+-- Busca um intervalo de itens do conjunto ordenado de forma crescente pelos indices indicados
+> ZRANGE "jogadores:pontuacao" 0 3
+
+-- Busca um intervalo de itens do conjunto ordenado de forma decrescente pelos indices indicados
+> ZREVRANGE "jogadores:pontuacao" 0 3
+
+-- Busca um intervalo de itens do conjunto ordenado de forma crescente pelos indices indicados, acompanhado
+-- pelo numero do rank de cada elemento
+> ZRANGE "jogadores:pontuacao" 0 3 WITHSCORES
+
+-- Busca todos os itens do conjunto ordenado de forma crescente, ja que o ultimo indice do intervalo esta como -1
+> ZRANGE "jogadores:pontuacao" 0 -1
+
+-- Busca os 3 ultimos itens do conjunto ordenado de forma crescente
+> ZRANGE "jogadores:pontuacao" -3 -1
