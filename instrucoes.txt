@@ -167,3 +167,15 @@
 
 -- Busca os 3 ultimos itens do conjunto ordenado de forma crescente
 > ZRANGE "jogadores:pontuacao" -3 -1
+
+-- Retorna a pontuacao(score) de um determinado elemento do conjunto ordenado
+> ZSCORE "jogadores:pontuacao" "guilherme"
+
+-- Retorna a posicao de um determinado elemento de um conjunto ordenado de forma crescente
+> ZRANK "jogadores:pontuacao" "guilherme"
+
+-- Retorna a posicao de um determinado elemento de um conjunto ordenado de forma decrescente
+> ZREVRANK "jogadores:pontuacao" "guilherme"
+
+-- Incrementa um valor no rank no elemento em um conjunto ordernado
+> ZINCRBY "jogadores:pontuacao" 1000 "guilherme"
